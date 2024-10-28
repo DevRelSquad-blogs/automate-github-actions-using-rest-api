@@ -1,0 +1,29 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo CI/CD App</title>
+</head>
+<body>
+    <h1>Demo CI/CD Application</h1>
+    <button onclick="triggerWorkflow()">Trigger CI/CD Pipeline</button>
+    <p id="status"></p>
+
+    <script>
+        async function triggerWorkflow() {
+            document.getElementById("status").innerText = "Triggering workflow...";
+            try {
+                const response = await fetch('/trigger-workflow', {
+                    method: 'POST',
+                });
+                const result = await response.json();
+                document.getElementById("status").innerText = result.message;
+            } catch (error) {
+                document.getElementById("status").innerText = "Failed to trigger workflow.";
+            }
+        }
+    </script>
+</body>
+</html>
